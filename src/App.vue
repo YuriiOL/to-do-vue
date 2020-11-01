@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <compnent :is="layout">
-      <router-view/>
     </compnent>
   </div>
 </template>
@@ -12,6 +11,7 @@ import MainLayout from "@/layouts/MainLayout";
 export default {
   computed:{
     layout(){
+    
       return (this.$route.meta.layout || 'empty')+'-layout'
     }
   },
@@ -22,7 +22,7 @@ export default {
 </script>
 <style>
 body{
-  margin: 0px;
+  margin: 0;
 }
 *{
   box-sizing: border-box;
