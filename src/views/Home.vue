@@ -31,6 +31,8 @@ export default {
 }
 </script>
 <style scoped>
+
+
 .home {
   color: black;
   display: flex;
@@ -60,13 +62,12 @@ h1{
   background-color: white;
   border-radius: 25px;
   height: 500px;
-  width: 46%;
+  width: 700px;
   padding: 10px 20px;
   font-size: 20px;
   overflow: auto;
 
 }
-
 .task {
   display: flex;
   justify-content: space-between;
@@ -104,4 +105,24 @@ h1{
 ::-webkit-scrollbar-thumb:hover {
   background: #4a4a4a;
 }
+@media only screen and (max-width: 750px) {
+  .input,
+  .tasks {
+    width: 400px;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .input,
+  .tasks {
+    width: 250px;
+    font-size: 14px;
+  }
+}
+  @media only screen and (max-height: 668px) {
+
+    .tasks{
+      height: 330px;
+    }
+  }
+
 </style>

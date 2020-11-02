@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -24,7 +25,8 @@ export default new Vuex.Store({
         deleatTask(state, idtask) {
             state.tasks.splice(idtask, 1)
         },
-    },
+
+        },
 
     actions: {},
     modules: {}
