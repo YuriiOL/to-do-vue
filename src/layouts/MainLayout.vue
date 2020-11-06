@@ -29,10 +29,11 @@ export default {
     name(){
       return this.$store.getters.info.name
     }
-
   },
+
   methods:{
     async logout(){
+      this.$store.state.tasks = []
       await this.$store.dispatch('logout')
       this.$router.push('/')
     },

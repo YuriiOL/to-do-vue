@@ -1,7 +1,10 @@
 <template>
   <div class="home">
     <label>
-      <input class="input" type="text" placeholder="Що будеш робити?" v-model.lazy="task.t" @keyup.enter="addTask">
+      <input class="input" type="text" placeholder="Що будеш робити?" v-model.lazy="task.t"
+             @keyup.enter="addTask()">
+      <button @click="sendData()" v-if="tasks.length == 0">Save</button>
+      <button @click="update()" v-else>SaveUpdate</button>
     </label>
     <h1>Завдання</h1>
     <div class="tasks">
@@ -21,12 +24,39 @@ import { mapGetters, mapMutations} from 'vuex'
 export default {
 
   name: 'Home',
+  data(){
+    return{
+      toDoFromDataBase: null
+    }
+  },
   computed:{
     ...mapGetters(['task',"tasks"])
   },
+
   methods:{
-    ...mapMutations(['addTask', 'deleatTask', ])
+    ...mapMutations(['addTask', 'deleatTask', ]),
+    async update(){
+      await this.$store.dispatch('updateCategory', {todo: this.tasks})
+    },
+    async sendData(){
+      try {
+        await this.$store.dispatch('saveToDo', {todo: this.tasks})
+        // console.log(saveToDo);
+      }catch (e) {
+        console.log(e)
+      }
+    },
   },
+  async mounted() {
+    this.toDoFromDataBase = await this.$store.dispatch('fetchTodo')
+    // console.log(this.toDoFromDataBase);
+    for (const i of this.toDoFromDataBase) {
+      for (const todoSingle of i) {
+        this.$store.state.tasks.push(todoSingle)
+      }
+    }
+  },
+
   components: {}
 }
 </script>
