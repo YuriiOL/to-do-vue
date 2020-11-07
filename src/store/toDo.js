@@ -2,31 +2,23 @@ import firebase from "firebase/app";
 
 export default {
     actions: {
-        async updateCategory({ commit, dispatch }, {todo}) {
+        async updateTodo({commit, dispatch}, {todo, id}) {
             try {
                 const uid = await dispatch('getUid')
-                await firebase.database().ref(`/users/${uid}/data`).update({todo})
-
+                console.log(id);
+                await firebase.database().ref(`/users/${uid}/data`).child(id).update({todo})
             } catch (e) {
-                commit('setError', e)
+                console.log(commit);
                 throw e
-
             }
         },
         async fetchTodo({commit, dispatch}) {
             try {
                 console.log(commit)
                 const uid = await dispatch('getUid')
+                console.log(uid)
                 const toDoListFromDataBase = (await firebase.database().ref(`/users/${uid}/data`).once('value')).val() || {}
-                let list = []
-
-                Object.keys(toDoListFromDataBase).forEach(key => {
-                    list.push(
-                        toDoListFromDataBase[key].todo
-                    )
-                })
-                // console.log(list)
-                return list
+                return toDoListFromDataBase
             } catch (e) {
                 throw `${e}`
             }
@@ -35,6 +27,7 @@ export default {
             try {
                 console.log(commit)
                 const uid = await dispatch('getUid')
+                console.log(uid)
                 await firebase.database().ref(`/users/${uid}/data`).push({todo})
                 return {todo}
             } catch (e) {

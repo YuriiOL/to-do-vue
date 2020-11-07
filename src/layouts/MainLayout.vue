@@ -41,6 +41,7 @@ export default {
 }
 </script>
 <style scoped>
+
 .mainLoyout {
   background-color: #b0b0b0;
   height: 100vh;
@@ -59,11 +60,14 @@ export default {
 .logo {
   width: 80%;
 }
-.login {
+.logout {
   display: flex;
   cursor: pointer;
   text-decoration: none;
   color: white;
+}
+.logout:hover{
+  color: darkred;
 }
 .in {
   margin-top: 2px;
@@ -85,10 +89,15 @@ export default {
 .logout{
   display: flex;
 }
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 500px) {
   .nav > div {
     margin: 0 20px;
     font-size: 14px;
+  }
+}
+@media only screen and (max-width: 325px) {
+  .nav> div{
+    font-size: 12px;
   }
 }
 </style>

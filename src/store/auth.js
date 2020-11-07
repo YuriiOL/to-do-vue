@@ -7,6 +7,7 @@ export default {
                await firebase.auth().signInWithEmailAndPassword(email, password)
                 console.log(dispatch, commit);
             }catch (e) {
+                alert('Неправильний Логін або Пароль')
                 throw `${e}`
             }
         },
@@ -19,7 +20,8 @@ export default {
                     .ref(`/users/${uid}/info`)
                     .set({ name: name })
             } catch (e) {
-                commit('setError', e)
+                console.log(commit)
+                alert('Цей Email вже використовується')
                 throw e
             }
         },
